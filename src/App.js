@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import ParticlesBg from "particles-bg";
 import Navigation from "./components/navigation/Navigation";
 import Logo from "./components/logo/Logo";
 import Rank from "./components/rank/Rank";
@@ -9,6 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <ParticlesBg type="cobweb" color="#3A1078" num={100} bg={true} />
         <Navigation />
         <Logo />
         <Rank />

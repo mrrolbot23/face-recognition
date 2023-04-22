@@ -4,9 +4,9 @@ import "./ImageLinkForm.css";
 const ImageLinkForm = () => {
   return (
     <div className="form-container">
-      <p className="title">
+      <h2 className="title">
         {"This Magic Brain will detect faces in pitures. Give it a try."}
-      </p>
+      </h2>
       <div className="input-container">
         <input type="text" />
         <button>Detect</button>
