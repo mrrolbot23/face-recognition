@@ -1,0 +1,21 @@
+.logo {
+  margin: 10px;
+  background: linear-gradient(to left, rgb(11, 78, 174), rgb(219, 228, 138));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #22222260;
+  height: 200px;
+  width: 200px;
+}
+
+.logo-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brain {
+  color: rgba(0, 21, 255, 0.613);
+  height: 100px;
+}

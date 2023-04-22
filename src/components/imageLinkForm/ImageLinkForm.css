@@ -1,0 +1,53 @@
+.form-container {
+  width: 70%;
+  text-align: center;
+  margin: auto;
+}
+
+.input-container {
+  box-shadow: 10px 10px 10px #0055ff8f;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
+    linear-gradient(63deg, transparent 74%, #999 78%),
+    linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%),
+    #444;
+  background-size: 16px 48px;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.title {
+  font-size: 2em;
+}
+
+.input-container input {
+  width: 70%;
+  height: 2rem;
+}
+
+.input-container button {
+  cursor: pointer;
+  margin: 5;
+  width: 30%;
+  transition: 0.3s;
+  border: none;
+
+  box-shadow: 4px 4px 5px #2222229c;
+  background-color: rgb(11, 78, 174);
+  color: aliceblue;
+  padding: 5px;
+  font-size: 1.5rem;
+}
+
+.input-container button:hover {
+  transform: scale(1.05);
+}
+
+.input-container button:active {
+  box-shadow: none;
+}
