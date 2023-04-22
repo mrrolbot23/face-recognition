@@ -22,8 +22,12 @@
 }
 
 .input-container input {
+  background: rgba(240, 248, 255, 0.836);
+  border: none;
+  font-size: 1.8rem;
   width: 70%;
   height: 2rem;
+  transition: 0.03s;
 }
 
 .input-container button {
@@ -34,13 +38,19 @@
   border: none;
 
   box-shadow: 4px 4px 5px #2222229c;
-  background-color: rgb(11, 78, 174);
+  background-color: rgba(11, 79, 174, 0.898);
   color: aliceblue;
   padding: 5px;
   font-size: 1.5rem;
 }
 
+.input-container input:hover {
+  background-color: aliceblue;
+  transform: scale(1.05);
+}
+
 .input-container button:hover {
+  background-color: rgb(11, 78, 174);
   transform: scale(1.05);
 }
 
