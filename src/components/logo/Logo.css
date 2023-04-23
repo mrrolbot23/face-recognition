@@ -7,7 +7,7 @@
   );
   border: none;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px #22222260;
+  box-shadow: 5px 5px 5px #3a1078b9;
   height: 150px;
   width: 150px;
   position: relative;
@@ -23,6 +23,6 @@
 }
 
 .brain {
-  color: rgba(0, 21, 255, 0.613);
+  color: #3a1078d5;
   height: 80px;
 }

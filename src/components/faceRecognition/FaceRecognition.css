@@ -1,0 +1,27 @@
+.container {
+  height: 45vh;
+}
+
+.image-container {
+  margin: 30px auto;
+  width: 500px;
+  height: auto;
+  position: absolute;
+  left: 10%;
+  right: 10%;
+}
+
+.image-container img {
+  box-shadow: 10px 10px 10px #3a1078ad;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.bounding-box {
+  position: absolute;
+  box-shadow: 0 0 0 3px #088395 inset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@
 }
 
 .input-container {
-  box-shadow: 10px 10px 10px #0055ff8f;
+  box-shadow: 10px 10px 10px #3a1078ad;
   border: none;
   border-radius: 10px;
   background: linear-gradient(63deg, #999 23%, transparent 23%) 7px 0,
@@ -13,7 +13,7 @@
     linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%),
     #444;
   background-size: 16px 48px;
-  width: 60%;
+  width: 80%;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@
 
 .input-container input {
   background: rgba(240, 248, 255, 0.836);
-  border: none;
+  border: 3px solid rgba(11, 79, 174, 0.898);
   font-size: 1.8rem;
   width: 70%;
   height: 2rem;
@@ -32,7 +32,6 @@
 
 .input-container button {
   cursor: pointer;
-  margin: 5;
   width: 30%;
   transition: 0.3s;
   border: none;
@@ -41,7 +40,7 @@
   background-color: rgba(11, 79, 174, 0.898);
   color: aliceblue;
   padding: 5px;
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 
 .input-container input:hover {
