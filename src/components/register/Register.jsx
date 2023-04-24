@@ -9,7 +9,7 @@ function Register({ onRouteChange }) {
     <div id="register-form" className="register-form">
       <p>Register</p>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="registerName">
           <Form.Label>Name</Form.Label>
           <br />
           <Form.Control
@@ -18,7 +18,7 @@ function Register({ onRouteChange }) {
             placeholder="Name"
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="registerEmail">
           <Form.Label>Email address</Form.Label>
           <br />
           <Form.Control
@@ -32,7 +32,7 @@ function Register({ onRouteChange }) {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="registerPassword">
           <Form.Label>Password</Form.Label>
           <br />
           <Form.Control
