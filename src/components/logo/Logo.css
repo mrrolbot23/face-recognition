@@ -10,9 +10,9 @@
   box-shadow: 5px 5px 5px #3a1078b9;
   height: 150px;
   width: 150px;
-  position: relative;
+  position: absolute;
   left: 20px;
-  top: -90px;
+  top: 10px;
 }
 
 .logo-container {
