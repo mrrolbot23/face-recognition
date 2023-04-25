@@ -15,27 +15,39 @@ class App extends Component {
     this.state = {
       input: "",
       imageUrl: "",
-      box: {},
+      box: [],
       route: "signin",
       isSignedIn: false,
     };
   }
 
-  calculateFaceLocation = (dataArray) => {
-    const face = dataArray.outputs[0].data.regions[0].region_info.bounding_box;
+  newFaceLocation = (array) => {
+    const faces = array.outputs[0].data.regions;
     const image = document.getElementById("input-image");
     const width = Number(image.width);
     const height = Number(image.height);
-    return {
-      leftCol: face.left_col * width,
-      topRow: face.top_row * height,
-      rightCol: width - face.right_col * width,
-      bottomRow: height - face.bottom_row * height,
+
+    const getFaces = (faces) => {
+      let face = {};
+      let boxObject = [];
+      for (let i = 0; i < faces.length; i++) {
+        face[i] = faces[i].region_info.bounding_box;
+
+        boxObject[i] = {
+          leftCol: face[i].left_col * width,
+          topRow: face[i].top_row * height,
+          rightCol: width - face[i].right_col * width,
+          bottomRow: height - face[i].bottom_row * height,
+        };
+      }
+      return boxObject;
     };
+
+    // console.log(getFaces(faces));
+    return getFaces(faces);
   };
 
   displayFaceBox = (box) => {
-    console.log(box);
     this.setState({ box: box });
   };
 
@@ -44,15 +56,14 @@ class App extends Component {
   };
 
   onSubmit = () => {
-    console.log("click");
     this.setState({ imageUrl: this.state.input });
 
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
-    const PAT = "af4e28220a95470da287e845e5352a8f";
+    const PAT = process.env.REACT_APP_PAT;
     // Specify the correct user_id/app_id pairings
     // Since you're making inferences outside your app's scope
     const USER_ID = "mrrolbot23";
-    const APP_ID = "smart-brain";
+    const APP_ID = process.env.REACT_APP_APP_ID;
     // Change these to whatever model and image URL you want to use
     const MODEL_ID = "face-detection";
     const IMAGE_URL = this.state.input;
@@ -87,7 +98,7 @@ class App extends Component {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => this.displayFaceBox(this.calculateFaceLocation(result)))
+      .then((result) => this.displayFaceBox(this.newFaceLocation(result)))
       .catch((error) => console.log("error", error));
   };
 

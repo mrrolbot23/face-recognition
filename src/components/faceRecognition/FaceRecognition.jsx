@@ -6,15 +6,20 @@ const FaceRecognition = ({ imageUrl, box }) => {
     <div className="container">
       <div className="image-container">
         <img id="input-image" src={imageUrl} alt="" />
-        <div
-          className="bounding-box"
-          style={{
-            top: box.topRow,
-            right: box.rightCol,
-            bottom: box.bottomRow,
-            left: box.leftCol,
-          }}
-        ></div>
+        {box.map((face, i) => {
+          return (
+            <div
+              className="bounding-box"
+              key={[i]}
+              style={{
+                top: box[i].topRow,
+                right: box[i].rightCol,
+                bottom: box[i].bottomRow,
+                left: box[i].leftCol,
+              }}
+            ></div>
+          );
+        })}
       </div>
     </div>
   );
