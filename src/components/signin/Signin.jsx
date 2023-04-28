@@ -4,50 +4,85 @@ import Form from "react-bootstrap/Form";
 import "./Signin.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-function Signin({ onRouteChange }) {
-  return (
-    <div id="signin-form" className="signin-form">
-      <h2>Sign In</h2>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <br />
-          <Form.Control
-            className="input-field"
-            type="email"
-            placeholder="Email"
-          />
-          <br />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+class Signin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signInEmail: "",
+      signInPassword: "",
+    };
+  }
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+  onEmailChange = (event) => {
+    this.setState({ signInEmail: event.target.value });
+  };
+
+  onPasswordChange = (event) => {
+    this.setState({ signInPassword: event.target.value });
+  };
+
+  onSubmission = () => {
+    fetch("http://localhost:5000/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === "success") {
+          this.props.onRouteChange("home");
+        }
+        console.log(data);
+      });
+  };
+
+  render() {
+    const { onRouteChange } = this.props;
+    return (
+      <div id="signin-form" className="signin-form">
+        <h2>Sign In</h2>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <br />
+            <Form.Control
+              onChange={this.onEmailChange}
+              className="input-field"
+              type="email"
+              placeholder=" Email"
+            />
+            <br />
+          </Form.Group>
           <br />
-          <Form.Control
-            className="input-field"
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-        <Button
-          onClick={() => onRouteChange("home")}
-          className="signin-button"
-          variant="primary"
-          type="submit"
-        >
-          Sign In
-        </Button>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <p onClick={() => onRouteChange("register")} className="register">
-            Register
-          </p>
-        </Form.Group>
-      </Form>
-    </div>
-  );
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <br />
+            <Form.Control
+              onChange={this.onPasswordChange}
+              className="input-field"
+              type="password"
+              placeholder=" Password"
+            />
+          </Form.Group>
+          <Button
+            onClick={this.onSubmission}
+            className="signin-button"
+            variant="primary"
+          >
+            Sign In
+          </Button>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <p onClick={() => onRouteChange("register")} className="register">
+              Register
+            </p>
+          </Form.Group>
+        </Form>
+      </div>
+    );
+  }
 }
 
 export default Signin;
