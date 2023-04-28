@@ -18,8 +18,28 @@ class App extends Component {
       box: [],
       route: "signin",
       isSignedIn: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+        entries: 0,
+        joined: "",
+      },
     };
   }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
+  };
 
   newFaceLocation = (array) => {
     const faces = array.outputs[0].data.regions;
@@ -55,7 +75,7 @@ class App extends Component {
     this.setState({ input: event.target.value });
   };
 
-  onSubmit = () => {
+  onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
@@ -98,7 +118,22 @@ class App extends Component {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => this.displayFaceBox(this.newFaceLocation(result)))
+      .then((result) => {
+        if (result) {
+          fetch("http://localhost:5000/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              this.setState(Object.assign(this.state.user, { entries: count }));
+            });
+        }
+        this.displayFaceBox(this.newFaceLocation(result));
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -112,7 +147,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, route, imageUrl, box } = this.state;
+    const { isSignedIn, route, imageUrl, box, user } = this.state;
     return (
       <div className="App">
         <ParticlesBg type="cobweb" color="#3A1078" num={120} bg={true} />
@@ -123,17 +158,20 @@ class App extends Component {
         {route === "home" ? (
           <div>
             <Logo />
-            <Rank />
+            <Rank userName={user.name} userEntries={user.entries} />
             <ImageLinkForm
               onInputChange={this.onInputChange}
-              onSubmit={this.onSubmit}
+              onSubmit={this.onPictureSubmit}
             />
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
         ) : route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
         )}
       </div>
     );
