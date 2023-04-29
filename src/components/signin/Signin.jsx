@@ -35,6 +35,9 @@ class Signin extends React.Component {
         if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange("home");
+        } else {
+          var x = document.getElementById("wrong-credentials");
+          x.style.display = "block";
         }
       });
   };
@@ -44,6 +47,12 @@ class Signin extends React.Component {
     return (
       <div id="signin-form" className="signin-form">
         <h2>Sign In</h2>
+        <h3
+          id="wrong-credentials"
+          style={{ color: "rgb(152, 8, 8)", display: "none" }}
+        >
+          Wrong Credentials
+        </h3>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>

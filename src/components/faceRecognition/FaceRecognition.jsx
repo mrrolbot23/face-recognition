@@ -21,6 +21,7 @@ const FaceRecognition = ({ imageUrl, box }) => {
           );
         })}
       </div>
+      <h2>{box.length} Faces detected</h2>
     </div>
   );
 };
