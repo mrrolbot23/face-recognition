@@ -53,32 +53,35 @@ class Register extends React.Component {
           <Form.Group className="mb-3" controlId="registerName">
             <Form.Label>Name</Form.Label>
             <br />
+
             <Form.Control
+              required
               onChange={this.onNameChange}
               className="input-field"
               type="text"
               placeholder="Name"
             />
           </Form.Group>
+          <br />
           <Form.Group className="mb-3" controlId="registerEmail">
             <Form.Label>Email address</Form.Label>
             <br />
             <Form.Control
+              required
               onChange={this.onEmailChange}
               className="input-field"
               type="email"
               placeholder="Email"
             />
             <br />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <br />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="registerPassword">
             <Form.Label>Password</Form.Label>
             <br />
             <Form.Control
+              required
               onChange={this.onPasswordChange}
               className="input-field"
               type="password"

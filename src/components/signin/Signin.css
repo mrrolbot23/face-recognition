@@ -64,3 +64,9 @@
   box-shadow: none;
   transform: scale(1);
 }
+
+/* .wrong-credentials {
+  color: rgb(152, 8, 8);
+  display: flex;
+  justify-content: center;
+} */
