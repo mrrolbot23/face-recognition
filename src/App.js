@@ -9,24 +9,25 @@ import Rank from "./components/rank/Rank";
 import ImageLinkForm from "./components/imageLinkForm/ImageLinkForm.jsx";
 import FaceRecognition from "./components/faceRecognition/FaceRecognition";
 
+const initialState = {
+  input: "",
+  imageUrl: "",
+  box: [],
+  route: "signin",
+  isSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    password: "",
+    entries: 0,
+    joined: "",
+  },
+};
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: "",
-      imageUrl: "",
-      box: [],
-      route: "signin",
-      isSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        password: "",
-        entries: 0,
-        joined: "",
-      },
-    };
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -63,7 +64,6 @@ class App extends Component {
       return boxObject;
     };
 
-    // console.log(getFaces(faces));
     return getFaces(faces);
   };
 
@@ -78,45 +78,13 @@ class App extends Component {
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
-    // Your PAT (Personal Access Token) can be found in the portal under Authentification
-    const PAT = process.env.REACT_APP_PAT;
-    // Specify the correct user_id/app_id pairings
-    // Since you're making inferences outside your app's scope
-    const USER_ID = "mrrolbot23";
-    const APP_ID = process.env.REACT_APP_APP_ID;
-    // Change these to whatever model and image URL you want to use
-    const MODEL_ID = "face-detection";
-    const IMAGE_URL = this.state.input;
-
-    const raw = JSON.stringify({
-      user_app_id: {
-        user_id: USER_ID,
-        app_id: APP_ID,
-      },
-      inputs: [
-        {
-          data: {
-            image: {
-              url: IMAGE_URL,
-            },
-          },
-        },
-      ],
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Key " + PAT,
-      },
-      body: raw,
-    };
-
-    fetch(
-      "https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs",
-      requestOptions
-    )
+    fetch("http://localhost:5000/imageUrl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: this.state.input,
+      }),
+    })
       .then((response) => response.json())
       .then((result) => {
         if (result) {
@@ -130,7 +98,8 @@ class App extends Component {
             .then((response) => response.json())
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
-            });
+            })
+            .catch(console.log);
         }
         this.displayFaceBox(this.newFaceLocation(result));
       })
@@ -139,7 +108,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === "home") {
       this.setState({ isSignedIn: true });
     }
