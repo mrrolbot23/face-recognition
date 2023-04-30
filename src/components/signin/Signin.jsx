@@ -62,6 +62,7 @@ class Signin extends React.Component {
               className="input-field"
               type="email"
               placeholder=" Email"
+              required
             />
             <br />
           </Form.Group>
@@ -74,6 +75,7 @@ class Signin extends React.Component {
               className="input-field"
               type="password"
               placeholder=" Password"
+              required
             />
           </Form.Group>
           <Button
