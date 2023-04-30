@@ -78,7 +78,7 @@ class App extends Component {
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
-    fetch("http://localhost:5000/imageUrl", {
+    fetch(process.env.REACT_APP_URL_IMGURL, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -88,7 +88,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          fetch("http://localhost:5000/image", {
+          fetch(process.env.REACT_APP_URL_IMG, {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
