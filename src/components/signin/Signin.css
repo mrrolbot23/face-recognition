@@ -65,8 +65,8 @@
   transform: scale(1);
 }
 
-/* .wrong-credentials {
-  color: rgb(152, 8, 8);
-  display: flex;
-  justify-content: center;
-} */
+.demo-credentials {
+  margin-top: 5px;
+  color: #7432d7;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

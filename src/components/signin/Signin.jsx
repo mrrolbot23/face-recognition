@@ -1,15 +1,15 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import "./Signin.css";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import './Signin.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: "",
-      signInPassword: "",
+      signInEmail: '',
+      signInPassword: '',
     };
   }
 
@@ -23,8 +23,8 @@ class Signin extends React.Component {
 
   onSubmission = () => {
     fetch(process.env.REACT_APP_URL_SIGNIN, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: this.state.signInEmail,
         password: this.state.signInPassword,
@@ -34,10 +34,10 @@ class Signin extends React.Component {
       .then((user) => {
         if (user.id) {
           this.props.loadUser(user);
-          this.props.onRouteChange("home");
+          this.props.onRouteChange('home');
         } else {
-          var x = document.getElementById("wrong-credentials");
-          x.style.display = "block";
+          var x = document.getElementById('wrong-credentials');
+          x.style.display = 'block';
         }
       });
   };
@@ -49,14 +49,14 @@ class Signin extends React.Component {
         <h2>Sign In</h2>
         <h3
           id="wrong-credentials"
-          style={{ color: "rgb(152, 8, 8)", display: "none" }}
+          style={{ color: 'rgb(152, 8, 8)', display: 'none' }}
         >
           Wrong Credentials
         </h3>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <br />
+
             <Form.Control
               onChange={this.onEmailChange}
               className="input-field"
@@ -64,9 +64,9 @@ class Signin extends React.Component {
               placeholder=" Email"
               required
             />
-            <br />
+            <p className="demo-credentials">Demo Email: demo@email.com</p>
           </Form.Group>
-          <br />
+
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <br />
@@ -77,6 +77,7 @@ class Signin extends React.Component {
               placeholder=" Password"
               required
             />
+            <p className="demo-credentials">Demo Password: password123</p>
           </Form.Group>
           <Button
             onClick={this.onSubmission}
@@ -86,7 +87,7 @@ class Signin extends React.Component {
             Sign In
           </Button>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <p onClick={() => onRouteChange("register")} className="register">
+            <p onClick={() => onRouteChange('register')} className="register">
               Register
             </p>
           </Form.Group>

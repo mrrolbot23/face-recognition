@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import "./App.css";
-import ParticlesBg from "particles-bg";
-import Navigation from "./components/navigation/Navigation";
-import Signin from "./components/signin/Signin";
-import Register from "./components/register/Register";
-import Logo from "./components/logo/Logo";
-import Rank from "./components/rank/Rank";
-import ImageLinkForm from "./components/imageLinkForm/ImageLinkForm.jsx";
-import FaceRecognition from "./components/faceRecognition/FaceRecognition";
+import React, { Component } from 'react';
+import './App.css';
+import ParticlesBg from 'particles-bg';
+import Navigation from './components/navigation/Navigation';
+import Signin from './components/signin/Signin';
+import Register from './components/register/Register';
+import Logo from './components/logo/Logo';
+import Rank from './components/rank/Rank';
+import ImageLinkForm from './components/imageLinkForm/ImageLinkForm.jsx';
+import FaceRecognition from './components/faceRecognition/FaceRecognition';
 
 const initialState = {
-  input: "",
-  imageUrl: "",
+  input: '',
+  imageUrl: '',
   box: [],
-  route: "signin",
+  route: 'signin',
   isSignedIn: false,
   user: {
-    id: "",
-    name: "",
-    email: "",
-    password: "",
+    id: '',
+    name: '',
+    email: '',
+    password: '',
     entries: 0,
-    joined: "",
+    joined: '',
   },
 };
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
 
   newFaceLocation = (array) => {
     const faces = array.outputs[0].data.regions;
-    const image = document.getElementById("input-image");
+    const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
 
@@ -79,8 +79,8 @@ class App extends Component {
     this.setState({ imageUrl: this.state.input });
 
     fetch(process.env.REACT_APP_URL_IMGURL, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         input: this.state.input,
       }),
@@ -89,8 +89,8 @@ class App extends Component {
       .then((result) => {
         if (result) {
           fetch(process.env.REACT_APP_URL_IMG, {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               id: this.state.user.id,
             }),
@@ -103,13 +103,13 @@ class App extends Component {
         }
         this.displayFaceBox(this.newFaceLocation(result));
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log('error', error));
   };
 
   onRouteChange = (route) => {
-    if (route === "signout") {
+    if (route === 'signout') {
       this.setState(initialState);
-    } else if (route === "home") {
+    } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
     this.setState({ route: route });
@@ -124,7 +124,7 @@ class App extends Component {
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
         />
-        {route === "home" ? (
+        {route === 'home' ? (
           <div>
             <Logo />
             <Rank userName={user.name} userEntries={user.entries} />
@@ -134,7 +134,7 @@ class App extends Component {
             />
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
-        ) : route === "signin" ? (
+        ) : route === 'signin' ? (
           <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
           <Register
